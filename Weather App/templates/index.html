@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Weather</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <style>
+    body {
+      padding-top: 20px;
+    }
+
+    .navbar {
+      background: #337ab7;
+      color: white;
+    }
+
+    .container {
+      margin-top: 20px;
+    }
+
+    .form-control {
+      width: 80%;
+    }
+
+    .btn-search {
+      margin-left: -40px;
+    }
+
+    .weather-details {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .city-name {
+      color: #337ab7;
+      font-size: 30px;
+    }
+
+    .country-code {
+      color: #5cb85c;
+      font-size: 24px;
+    }
+
+    .coordinate {
+      color: #d9534f;
+      font-size: 18px;
+    }
+
+    .weather-info {
+      color: #f0ad4e;
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <h1 class="text-center">Weather Detector</h1>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="input-group">
+            <input type="text" class="form-control" name="city" placeholder="Search">
+            <div class="input-group-btn">
+              <button class="btn btn-default btn-search" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    {% if data.country_code %}
+    <div class="row weather-details">
+      <div class="col-md-6 col-md-offset-3">
+        <h1 class="city-name">{{city}}</h1>
+        <h3 class="country-code">Country: {{data.country_code}}</h3>
+        <h5 class="coordinate">Coordinate: {{data.coordinate}}</h5>
+        <h5 class="weather-info">Temperature: {{data.temp}}°C</h5>
+        <h5 class="weather-info">Pressure: {{data.pressure}} mb</h5>
+        <h5 class="weather-info">Wind: {{data.wind_kph}} kph</h5>
+        <h5 class="weather-info">Humidity: {{data.humidity}}</h5>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</body>
+
+</html>
